@@ -1,0 +1,25 @@
+{
+  "name": "@qavajs/steps-memory",
+  "version": "0.0.1",
+  "description": "steps to perform memory validation",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qavajs/steps-memory.git"
+  },
+  "authors": [
+    "Alexandr Galichenko"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/qavajs/steps-memory/issues"
+  },
+  "homepage": "https://github.com/qavajs/steps-memory#readme",
+  "devDependencies": {
+    "@cucumber/cucumber": "^8.3.1",
+    "typescript": "^4.7.4"
+  }
+}
