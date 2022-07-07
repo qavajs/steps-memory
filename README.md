@@ -13,4 +13,4 @@ module.exports = {
 }
 ```
 ## Steps
-[validation steps](docs/validation_steps.md)
+[Steps](docs/validation_steps.md)
