@@ -1,5 +1,5 @@
 # steps-memory
-Steps to perform memory verifications
+Steps to work with memory module
 
 ```javascript
 module.exports = {
@@ -13,4 +13,4 @@ module.exports = {
 }
 ```
 ## Steps
-[Steps](docs/validation_steps.md)
+[Steps](docs/steps.md)

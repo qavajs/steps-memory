@@ -31,11 +31,11 @@ Then(
 );
 
 /**
- * Set memory value
- * @param {string} key
+ * Save value to memory
  * @param {string} value
- * @example I set 'key' = 'value'
+ * @param {string} key
+ * @example I save 'value' to memory as 'key'
  */
-When('I set {string} = {string}', function (key, value) {
+When('I save {string} to memory as {string}', function (value, key) {
     memory.setValue(key, value);
 });
