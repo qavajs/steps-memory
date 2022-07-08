@@ -1,7 +1,11 @@
-import { Then } from '@cucumber/cucumber';
+import { Then, When } from '@cucumber/cucumber';
+import memory from '@qavajs/memory';
 
 /**
  * Verify that value from memory satisfies validation against other value
+ * @param {any} value1 - first value
+ * @param {Function} validation - validation
+ * @param {any} value2 - second value
  * @example I expect '$value' equals to '$anotherValue'
  * @example I expect '$value' does not contain '56'
  */
@@ -11,6 +15,9 @@ Then('I expect {text} {validation} {text}', async function (value1: any, validat
 
 /**
  * Verify that every element in array satisfies validation against other value
+ * @param {any} arr - arr
+ * @param {Function} validation - validation
+ * @param {any} value2 - expected value
  * @example I expect every element in '$arr' array to be above '$expectedValue'
  * @example I expect every element in '$arr' array to be above '50'
  */
@@ -22,3 +29,13 @@ Then(
        }
     }
 );
+
+/**
+ * Save value to memory
+ * @param {string} value
+ * @param {string} key
+ * @example I save 'value' to memory as 'key'
+ */
+When('I save {string} to memory as {string}', function (value, key) {
+    memory.setValue(key, value);
+});

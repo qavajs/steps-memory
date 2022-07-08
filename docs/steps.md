@@ -1,4 +1,4 @@
-# Validation Steps
+# Steps
 
 ---
 ### I expect {text} {validation} {text} &#9989;
@@ -32,4 +32,19 @@ example:
 ```gherkin
 Then I expect every element in '$arr' array to be above '$expectedValue'
 Then I expect every element in '$arr' array to be above '50'
+```
+
+---
+### I save {string} to memory as {string} &#9989;
+
+Set memory value
+
+| param |  type  | description | example |
+|:-----:|:------:|:-----------:|:-------:|
+| value | string |    value    |         |
+|  key  | string |     key     |         |
+
+example:
+```gherkin
+Then I save 'value' to memory as 'key'
 ```
