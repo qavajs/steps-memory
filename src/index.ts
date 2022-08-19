@@ -14,8 +14,8 @@ import { getValue } from './transformers';
 Then(
     'I expect {string} {memoryValidation} {string}',
     async function (value1: string, validationType: string, value2: string) {
-        const val1 = await getValue(value1);
-        const val2 = await getValue(value2);
+        const val1: any = await getValue(value1);
+        const val2: any = await getValue(value2);
         const validation: Function = getValidation(validationType);
         validation(val1, val2);
 });
@@ -31,8 +31,8 @@ Then(
 Then(
     'I expect at least {int} elements in {string} array {memoryValidation} {string}',
     async function (expectedNumber: number, arr: string, validationType: string, expectedValue: string) {
-        const array = await getValue(arr);
-        const val = await getValue(expectedValue);
+        const array: Array<any> = await getValue(arr);
+        const val: any = await getValue(expectedValue);
         const validation: Function = getValidation(validationType);
         const failCounter = { fail: 0, pass: 0 };
         for (const value of array) {
@@ -60,8 +60,8 @@ Then(
 Then(
     'I expect every element in {string} array {memoryValidation} {string}',
     async function (arr: string, validationType: string, expectedValue: string) {
-        const array = await getValue(arr);
-        const val = await getValue(expectedValue);
+        const array: Array<any> = await getValue(arr);
+        const val: any = await getValue(expectedValue);
         const validation: Function = getValidation(validationType);
         for (const value of array) {
            validation(await value, val);
@@ -91,6 +91,6 @@ When(
  * @param {string} key
  * @example I save 'value' to memory as 'key'
  */
-When('I save {string} to memory as {string}', function (value, key) {
+When('I save {string} to memory as {string}', function (value: string, key: string) {
     memory.setValue(key, value);
 });
