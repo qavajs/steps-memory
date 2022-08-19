@@ -21,6 +21,35 @@ Then(
 });
 
 /**
+ * Verify that at least x elements in array pass validation
+ * @param {string} arr - arr
+ * @param {string} validation - validation
+ * @param {string} expectedValue - expected value
+ * @example I expect at least 1 element(s) in '$arr' array to be above '$expectedValue'
+ * @example I expect at least 2 element(s) in '$arr' array to be above '50'
+ */
+Then(
+    'I expect at least {int} elements in {string} array {memoryValidation} {string}',
+    async function (expectedNumber: number, arr: string, validationType: string, expectedValue: string) {
+        const array = await getValue(arr);
+        const val = await getValue(expectedValue);
+        const validation: Function = getValidation(validationType);
+        const failCounter = { fail: 0, pass: 0 };
+        for (const value of array) {
+            try {
+                validation(await value, val);
+                failCounter.pass++;
+            } catch (err) {
+                failCounter.fail++;
+            }
+        }
+        if (failCounter.pass < expectedNumber) {
+            throw new Error(`Less than ${expectedNumber} pass ${validationType} verification`);
+        }
+    }
+);
+
+/**
  * Verify that every element in array satisfies validation against other value
  * @param {string} arr - arr
  * @param {string} validation - validation
@@ -37,6 +66,22 @@ Then(
         for (const value of array) {
            validation(await value, val);
         }
+    }
+);
+
+/**
+ * Save result of math expression and save result to memory
+ * @param expression - string expression
+ * @param key - key to store value
+ * @example When I save result of math expression '{$variable} + 42' as 'result'
+ * @example When I save result of math expression '{$random()} * 100' as 'result'
+ */
+When(
+    'I save result of math expression {string} as {string}',
+    async function (expression: string, key: string) {
+        const resolvedExpression: string = await getValue(expression);
+        const exprFn = new Function('return ' + resolvedExpression);
+        memory.setValue(key, exprFn);
     }
 );
 
