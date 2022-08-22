@@ -25,6 +25,6 @@
   },
   "dependencies": {
     "@qavajs/memory": "^1.1.0",
-    "@qavajs/validation": "^0.0.1"
+    "@qavajs/validation": "^0.0.2"
   }
 }
