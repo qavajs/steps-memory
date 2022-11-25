@@ -81,7 +81,7 @@ When(
     async function (expression: string, key: string) {
         const resolvedExpression: string = await getValue(expression);
         const exprFn = new Function('return ' + resolvedExpression);
-        memory.setValue(key, exprFn);
+        memory.setValue(key, exprFn());
     }
 );
 
