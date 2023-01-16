@@ -87,10 +87,15 @@ When(
 
 /**
  * Save value to memory
- * @param {string} value
- * @param {string} key
+ * @param {string} alias - value to save or alias for previously saved value
+ * @param {string} key - key to store value
  * @example I save 'value' to memory as 'key'
+ * @example I save '$getRandomUser()' to memory as 'user'
  */
-When('I save {string} to memory as {string}', function (value: string, key: string) {
-    memory.setValue(key, value);
-});
+When(
+   'I save {string} to memory as {string}',
+    async function (alias: string, key: string) {
+      const value: string = await memory.getValue(alias);
+      memory.setValue(key, value);
+    }
+);
