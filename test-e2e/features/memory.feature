@@ -8,6 +8,9 @@ Feature: Memory
     When I save "$getString()" to memory as 'string1'
     Then I expect '$string1' to be equal 'I was computed'
 
-	Scenario: save result of async computed to memory
+  Scenario: save result of async computed to memory
     When I save "$getStringAsync()" to memory as 'string1'
     Then I expect '$string1' to be equal 'I was computed async'
+
+  Scenario: escape $ in expected value
+    Then I expect '\\$42' to be equal '\\$42'
