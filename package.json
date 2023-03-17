@@ -12,7 +12,8 @@
     "url": "git+https://github.com/qavajs/steps-memory.git"
   },
   "authors": [
-    "Alexandr Galichenko"
+    "Alexandr Galichenko",
+    "Alexandr Legchilov"
   ],
   "license": "MIT",
   "bugs": {
