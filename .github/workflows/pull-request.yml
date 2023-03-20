@@ -16,3 +16,9 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm run test:e2e
+      - name: junit report
+        uses: mikepenz/action-junit-report@v3
+        if: always()
+        with:
+          report_paths: './test-e2e/report.xml'
+          fail_on_failure: true

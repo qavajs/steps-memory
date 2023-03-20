@@ -14,3 +14,32 @@ Feature: Memory
 
   Scenario: escape $ in expected value
     Then I expect '\\$42' to be equal '\\$42'
+
+  Scenario: set value
+    When I set 'someKey' = 'someValue'
+    Then I expect '$someKey' to be equal 'someValue'
+
+  Scenario: save json to memory
+    When I save json to memory as 'jsonKey':
+    """
+    {
+      "key": 42
+    }
+    """
+    Then I expect '$jsonKey.key' to be equal '42'
+
+  Scenario: save kv to memory
+    When I save key-value pairs to memory as 'kv':
+      | key        | 42          |
+      | anotherKey | stringValue |
+    Then I expect '$kv.key' to be equal '42'
+    And I expect '$kv.anotherKey' to be equal 'stringValue'
+
+  Scenario Outline: arr expectation (<validation>)
+    When I expect every element in '$arr' array <validation> '<expectedValue>'
+
+    Examples:
+      | validation   | expectedValue |
+      | not to equal | 10            |
+      | to be above  | 0             |
+      | have type    | number        |

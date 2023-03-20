@@ -1,7 +1,8 @@
-import { Then, When } from '@cucumber/cucumber';
+import { DataTable, Then, When } from '@cucumber/cucumber';
 import memory from '@qavajs/memory';
 import { getValidation } from '@qavajs/validation';
 import { getValue } from './transformers';
+import { dataTable2Object } from './utils';
 
 /**
  * Verify that value from memory satisfies validation against other value
@@ -99,3 +100,53 @@ When(
       memory.setValue(key, value);
     }
 );
+
+/**
+ * Save value to memory
+ * @param {string} key - key to store value
+ * @param {string} value - value to save or alias for previously saved value
+ * @example I set 'key' = 'value'
+ */
+When(
+    'I set {string} = {string}',
+    async function (key: string, value: string) {
+        const resolvedValue: string = await memory.getValue(value);
+        memory.setValue(key, resolvedValue);
+    }
+);
+
+/**
+ * Save json value to memory
+ * @param {string} key - key to store value
+ * @param {string} json - multiline string
+ * @example I save json to memory as 'key':
+ * """
+ * {
+ *     "someKey": "someValue"
+ * }
+ * """
+ */
+When(
+    'I save json to memory as {string}:',
+    async function (key: string, json: string) {
+        const value: string = await memory.getValue(json);
+        memory.setValue(key, JSON.parse(value));
+    }
+);
+
+/**
+ * Save key-value pairs to memory
+ * @param {string} key - key to store value
+ * @param {string} kv - key-value
+ * @example I save key-value pairs to memory as 'key':
+ * | someKey      | 42               |
+ * | someOtherKey | $valueFromMemory |
+ */
+When(
+    'I save key-value pairs to memory as {string}:',
+    async function (key: string, kv: DataTable) {
+        const value = await dataTable2Object(kv);
+        memory.setValue(key, value);
+    }
+);
+
