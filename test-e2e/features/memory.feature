@@ -43,3 +43,11 @@ Feature: Memory
       | not to equal | 10            |
       | to be above  | 0             |
       | have type    | number        |
+
+  Scenario Outline: arr expectation (<validation>)
+    When I expect '<array>' array to be sorted by '<sort>'
+
+    Examples:
+      | array       | sort        |
+      | $arr        | $ascending  |
+      | $reverseArr | $descending |
