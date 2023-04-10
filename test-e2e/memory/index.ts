@@ -1,6 +1,7 @@
 export default class Memory {
 
     arr = [1, 2, 3, 4, 5];
+    reverseArr = [5, 4, 3, 2, 1];
     getString = function (): string {
         return 'I was computed';
     };
@@ -12,4 +13,7 @@ export default class Memory {
             }, 50);
         });
     }
+
+    ascending = (a: number, b: number) => a - b;
+    descending = (a: number, b: number) => b - a;
 }

@@ -150,3 +150,22 @@ When(
     }
 );
 
+/**
+ * Verify that array is sorted by
+ * @param {string} arr - memory key of array
+ * @param {string} comparator - memory key of sort comparator function https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#description
+ * @example I expect '$arr' array to be sorted by '$ascending'
+ */
+Then(
+    'I expect {string} array to be sorted by {string}',
+    async function (arr: string, comparator: string) {
+        const array: Array<any> = await getValue(arr);
+        if (!Array.isArray(array)) throw new Error(`'${arr}' is not an array`);
+        const comparatorFn: (a: any, b: any) => number = await getValue(comparator);
+        const arrayCopy: Array<any> = [...array];
+        arrayCopy.sort(comparatorFn);
+        const validation: Function = getValidation('to deeply equal');
+        validation(array, arrayCopy);
+    }
+);
+
