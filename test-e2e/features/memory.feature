@@ -51,3 +51,31 @@ Feature: Memory
       | array       | sort        |
       | $arr        | $ascending  |
       | $reverseArr | $descending |
+
+  Scenario: match schema
+    When I save json to memory as 'schema':
+    """
+    {
+        "type": "object",
+        "properties": {
+            "foo": {
+                "type": "integer"
+            },
+            "bar": {
+                "type": "string"
+            }
+        },
+        "required": [
+            "foo"
+        ],
+        "additionalProperties": false
+    }
+    """
+    When I save json to memory as 'object':
+    """
+    {
+      "foo": 1,
+      "bar": "abc"
+    }
+    """
+    Then I expect '$object' to match schema '$schema'
