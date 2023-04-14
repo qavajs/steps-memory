@@ -4,6 +4,9 @@ All notable changes to the "@qavajs/steps-memory" will be documented in this fil
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.0.11]
+- added match schema validation
+
 ## [0.0.10]
 - added _I expect array sorted_ step
 
