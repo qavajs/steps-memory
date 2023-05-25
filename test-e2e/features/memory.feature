@@ -79,3 +79,9 @@ Feature: Memory
     }
     """
     Then I expect '$object' to match schema '$schema'
+
+  Scenario: arr expectation
+    When I expect '$arr' array to include members:
+      | $number(1) |
+      | $number(2) |
+      | $number(3) |
