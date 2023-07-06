@@ -72,6 +72,8 @@ Then(
  * Verify that array is sorted by
  * @param {string} arr - memory key of array
  * @param {string} comparator - memory key of sort comparator function https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#description
+ * Important: This module does not include implementation of sorting function,
+ * as it may have various implementations for different types of compared data
  * @example I expect '$arr' array to be sorted by '$ascending'
  */
 Then(
@@ -80,6 +82,7 @@ Then(
         const array: Array<any> = await getValue(arr);
         if (!Array.isArray(array)) throw new Error(`'${arr}' is not an array`);
         const comparatorFn: (a: any, b: any) => number = await getValue(comparator);
+        if (typeof comparatorFn !== 'function') throw new Error(`'${comparator}' is not implemented`);
         const arrayCopy: Array<any> = [...array];
         arrayCopy.sort(comparatorFn);
         const validation: Function = getValidation('to deeply equal');

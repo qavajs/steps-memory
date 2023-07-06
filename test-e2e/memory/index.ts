@@ -2,12 +2,12 @@ export default class Memory {
 
     arr = [1, 2, 3, 4, 5];
     reverseArr = [5, 4, 3, 2, 1];
-    getString = function (): string {
+    getComputedString = function (): string {
         return 'I was computed';
     };
 
     getStringAsync = function (): Promise<string> {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             setTimeout(() => {
                 resolve('I was computed async');
             }, 50);
