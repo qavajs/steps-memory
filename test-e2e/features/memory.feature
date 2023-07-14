@@ -5,7 +5,7 @@ Feature: Memory
     Then I expect '$result' to be equal '33'
 
   Scenario: save result of sync computed to memory
-    When I save "$getString()" to memory as 'string1'
+    When I save "$getComputedString()" to memory as 'string1'
     Then I expect '$string1' to be equal 'I was computed'
 
   Scenario: save result of async computed to memory

@@ -24,7 +24,7 @@
     "@cucumber/cucumber": "^9.1.2",
     "@qavajs/cli": "^0.0.24",
     "@qavajs/console-formatter": "^0.2.1",
-    "@qavajs/memory": "^1.4.1",
+    "@qavajs/memory": "^1.5.1",
     "@qavajs/xunit-formatter": "^0.0.4",
     "@types/chai": "^4.3.5",
     "ts-node": "^10.9.1",
