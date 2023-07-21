@@ -1,11 +1,11 @@
 {
   "name": "@qavajs/steps-memory",
-  "version": "0.12.0",
+  "version": "0.13.0",
   "description": "steps to perform memory validation",
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "test:e2e": "ts-node --esm node_modules/@qavajs/cli/bin/qavajs.js run --config test-e2e/memory.ts"
+    "test:e2e": "ts-node node_modules/@qavajs/cli/bin/qavajs.js run --config test-e2e/memory.ts"
   },
   "repository": {
     "type": "git",
@@ -21,16 +21,16 @@
   },
   "homepage": "https://github.com/qavajs/steps-memory#readme",
   "devDependencies": {
-    "@cucumber/cucumber": "^9.1.2",
-    "@qavajs/cli": "^0.0.24",
-    "@qavajs/console-formatter": "^0.2.1",
-    "@qavajs/memory": "^1.5.1",
+    "@cucumber/cucumber": "^9.3.0",
+    "@qavajs/cli": "^0.27.0",
+    "@qavajs/console-formatter": "^0.5.0",
+    "@qavajs/memory": "^1.6.0",
     "@qavajs/xunit-formatter": "^0.0.4",
     "@types/chai": "^4.3.5",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "@qavajs/validation": "^0.0.5"
+    "@qavajs/validation": "^0.6.0"
   }
 }
