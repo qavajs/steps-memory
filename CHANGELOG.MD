@@ -4,6 +4,9 @@ All notable changes to the "@qavajs/steps-memory" will be documented in this fil
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.13.0]
+- updated validation dependency to enable proper error messages
+
 ## [0.12.0]
 - added validation step with parameter in form of data table array
 - added an error if implementation of sorting function was not found in memory

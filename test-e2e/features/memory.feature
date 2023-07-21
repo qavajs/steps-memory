@@ -82,6 +82,6 @@ Feature: Memory
 
   Scenario: arr expectation
     When I expect '$arr' array to include members:
-      | $number(1) |
-      | $number(2) |
-      | $number(3) |
+      | $js(1) |
+      | $js(2) |
+      | $js(3) |
