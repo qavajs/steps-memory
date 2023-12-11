@@ -1,6 +1,5 @@
 import { DataTable, Then, When } from '@cucumber/cucumber';
 import memory from '@qavajs/memory';
-import { getValidation } from '@qavajs/validation';
 import { getValue } from './transformers';
 import { dataTable2Object } from './utils';
 
