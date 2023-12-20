@@ -13,3 +13,12 @@ export async function dataTable2Object(dataTable: DataTable): Promise<{ [key: st
     }
     return obj;
 }
+
+/**
+ * Transform key-value data table to array
+ * @param dataTable
+ * @return {any[]}
+ */
+export function dataTable2Array(dataTable: DataTable): Promise<any[]> {
+    return Promise.all(dataTable.raw().map(([value]) => memory.getValue(value)));
+}
