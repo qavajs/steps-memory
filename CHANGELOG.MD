@@ -4,6 +4,10 @@ All notable changes to the "@qavajs/steps-memory" will be documented in this fil
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.14.0]
+- added _I expect {string} {memoryValidation} at least one of {string}_ step
+- added _I expect {string} {memoryValidation} all of {string}_ step
+
 ## [0.13.0]
 - updated validation dependency to enable proper error messages
 

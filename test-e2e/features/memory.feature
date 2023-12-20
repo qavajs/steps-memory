@@ -85,3 +85,28 @@ Feature: Memory
       | $js(1) |
       | $js(2) |
       | $js(3) |
+
+  Scenario: at least validation
+    When I save '$js([1,2,3,4,5])' to memory as 'arr'
+    Then I expect at least 1 element in '$arr' array to equal '1'
+    And I expect at least 2 elements in '$arr' array to be above '2'
+
+  Scenario: at least one of validation
+    When I save '$js([1,2,3,4,5])' to memory as 'expected'
+    Then I expect '1' to equal at least one of '$expected'
+
+  Scenario: at least one of validation data table
+    When I save '2' to memory as 'two'
+    Then I expect '2' to equal at least one of:
+      | 1    |
+      | $two |
+
+  Scenario: all of validation
+    When I save '$js([2,3,4,5])' to memory as 'expected'
+    Then I expect '$js(6)' to be greater than all of '$expected'
+
+  Scenario: all of validation
+    When I save '2' to memory as 'two'
+    Then I expect '3' not to equal all of:
+      | 1    |
+      | $two |
