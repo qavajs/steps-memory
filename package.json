@@ -1,6 +1,6 @@
 {
   "name": "@qavajs/steps-memory",
-  "version": "0.14.0",
+  "version": "0.15.0",
   "description": "steps to perform memory validation",
   "main": "index.js",
   "scripts": {
@@ -22,10 +22,10 @@
   },
   "homepage": "https://github.com/qavajs/steps-memory#readme",
   "devDependencies": {
-    "@cucumber/cucumber": "^10.0.1",
-    "@qavajs/cli": "^0.33.0",
+    "@cucumber/cucumber": "^10.3.1",
+    "@qavajs/cli": "^0.34.1",
     "@qavajs/console-formatter": "^0.6.0",
-    "@qavajs/memory": "^1.6.2",
+    "@qavajs/memory": "^1.7.0",
     "@types/chai": "^4.3.11",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"

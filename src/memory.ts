@@ -1,4 +1,4 @@
-import { DataTable, Then, When } from '@cucumber/cucumber';
+import { DataTable, When } from '@cucumber/cucumber';
 import memory from '@qavajs/memory';
 import { getValue } from './transformers';
 import { dataTable2Object } from './utils';
@@ -31,6 +31,14 @@ When(
     async function (alias: string, key: string) {
       const value: string = await memory.getValue(alias);
       memory.setValue(key, value);
+    }
+);
+
+When(
+    'I save multiline string to memory as {string}:',
+    async function (key: string, multilineString: string) {
+        const value: string = await memory.getValue(multilineString);
+        memory.setValue(key, value);
     }
 );
 
