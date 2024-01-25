@@ -28,6 +28,14 @@ Feature: Memory
     """
     Then I expect '$jsonKey.key' to be equal '42'
 
+  Scenario: save multiline string to memory
+    When I save multiline string to memory as 'multilineString':
+    """
+    Carriage
+    return
+    """
+    Then I expect '$multilineString' to equal '$multilineMemoryValue'
+
   Scenario: save kv to memory
     When I save key-value pairs to memory as 'kv':
       | key        | 42          |

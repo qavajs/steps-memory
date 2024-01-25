@@ -4,6 +4,8 @@ All notable changes to the "@qavajs/steps-memory" will be documented in this fil
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.15.0]
+- added _I save multiline string to memory as {string}_ step
 ## [0.14.0]
 - added _I expect {string} {memoryValidation} at least one of {string}_ step
 - added _I expect {string} {memoryValidation} all of {string}_ step

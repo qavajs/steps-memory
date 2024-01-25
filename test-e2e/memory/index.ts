@@ -17,4 +17,5 @@ export default class Memory {
 
     ascending = (a: number, b: number) => a - b;
     descending = (a: number, b: number) => b - a;
+    multilineMemoryValue = `Carriage\nreturn`;
 }
