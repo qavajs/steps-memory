@@ -4,8 +4,12 @@ All notable changes to the "@qavajs/steps-memory" will be documented in this fil
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.17.0]
+Breaking change: moved _@qavajs/validation_ to peer dependencies
+After update please install latest version of @qavajs/validation package
+
 ## [0.16.0]
-- updated validation dependency
+- updated validation dependency      
 
 ## [0.15.0]
 - added _I save multiline string to memory as {string}_ step
