@@ -4,6 +4,9 @@ All notable changes to the "@qavajs/steps-memory" will be documented in this fil
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [2.0.0]
+- updated validation dependency
+
 ## [0.17.0]
 Breaking change: moved _@qavajs/validation_ to peer dependencies
 After update please install latest version of @qavajs/validation package

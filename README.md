@@ -8,9 +8,7 @@ Step library to work with memory module
 ## Configuration
 
 ```javascript
-module.exports = {
-    default: {
-        require: ['@qavajs/steps-memory/index.js']
-    }
+export default {
+    require: ['@qavajs/steps-memory/index.js']
 }
 ```
