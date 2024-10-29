@@ -1,6 +1,6 @@
 {
   "name": "@qavajs/steps-memory",
-  "version": "0.17.0",
+  "version": "1.0.0",
   "description": "steps to perform memory validation",
   "main": "index.js",
   "scripts": {
