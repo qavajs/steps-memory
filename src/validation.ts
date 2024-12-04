@@ -1,7 +1,6 @@
 import { DataTable, Then } from '@cucumber/cucumber';
-import { getValidation } from '@qavajs/validation';
-import { getValue } from './transformers';
 import { dataTable2Array } from './utils';
+import { MemoryValue, Validation } from '@qavajs/core';
 
 /**
  * Verify that value from memory satisfies validation against other value
@@ -12,12 +11,9 @@ import { dataTable2Array } from './utils';
  * @example I expect '$value' does not contain '56'
  */
 Then(
-    'I expect {string} {memoryValidation} {string}',
-    async function (value1: string, validationType: string, value2: string) {
-        const val1: any = await getValue(value1);
-        const val2: any = await getValue(value2);
-        const validation = getValidation(validationType);
-        validation(val1, val2);
+    'I expect {value} {validation} {value}',
+    async function (value1: MemoryValue, validation: Validation, value2: MemoryValue) {
+        validation(await value1.value(), await value2.value());
     });
 
 /**
@@ -29,11 +25,10 @@ Then(
  * @example I expect at least 2 elements in '$arr' array to be above '50'
  */
 Then(
-    'I expect at least {int} element(s) in {string} array {memoryValidation} {string}',
-    async function (expectedNumber: number, arr: string, validationType: string, expectedValue: string) {
-        const array: Array<any> = await getValue(arr);
-        const val: any = await getValue(expectedValue);
-        const validation = getValidation(validationType);
+    'I expect at least {int} element(s) in {value} array {validation} {value}',
+    async function (expectedNumber: number, arr: MemoryValue, validation: Validation, expectedValue: MemoryValue) {
+        const array: Array<any> = await arr.value();
+        const val: any = await expectedValue.value();
         const failCounter = { fail: 0, pass: 0 };
         for (const value of array) {
             try {
@@ -44,7 +39,7 @@ Then(
             }
         }
         if (failCounter.pass < expectedNumber) {
-            throw new Error(`Less than ${expectedNumber} pass ${validationType} verification`);
+            throw new Error(`Less than ${expectedNumber} pass validation`);
         }
     }
 );
@@ -58,11 +53,10 @@ Then(
  * @example I expect every element in '$arr' array to be above '50'
  */
 Then(
-    'I expect every element in {string} array {memoryValidation} {string}',
-    async function (arr: string, validationType: string, expectedValue: string) {
-        const array: Array<any> = await getValue(arr);
-        const val: any = await getValue(expectedValue);
-        const validation = getValidation(validationType);
+    'I expect every element in {value} array {validation} {value}',
+    async function (arr: MemoryValue, validation: Validation, expectedValue: MemoryValue) {
+        const array: Array<any> = await arr.value();
+        const val: any = await expectedValue.value();
         for (const value of array) {
             validation(await value, val);
         }
@@ -78,15 +72,15 @@ Then(
  * @example I expect '$arr' array to be sorted by '$ascending'
  */
 Then(
-    'I expect {string} array to be sorted by {string}',
-    async function (arr: string, comparator: string) {
-        const array: Array<any> = await getValue(arr);
+    'I expect {value} array to be sorted by {value}',
+    async function (arr: MemoryValue, comparator: MemoryValue) {
+        const array: Array<any> = await arr.value();
         if (!Array.isArray(array)) throw new Error(`'${arr}' is not an array`);
-        const comparatorFn: (a: any, b: any) => number = await getValue(comparator);
-        if (typeof comparatorFn !== 'function') throw new Error(`'${comparator}' is not implemented`);
+        const comparatorFn: (a: any, b: any) => number = await comparator.value();
+        if (typeof comparatorFn !== 'function') throw new Error(`Comparator is not a implemented`);
         const arrayCopy: Array<any> = [...array];
         arrayCopy.sort(comparatorFn);
-        const validation = getValidation('to deeply equal');
+        const validation = this.validation('to deeply equal');
         validation(array, arrayCopy);
     }
 );
@@ -103,12 +97,11 @@ Then(
  *  | tres |
  */
 Then(
-    'I expect {string} array {memoryValidation}:',
-    async function (arr: string, validationType: string, members: DataTable) {
-        const array = await getValue(arr);
-        const validation = getValidation(validationType);
+    'I expect {value} array {validation}:',
+    async function (arr: MemoryValue, validation: Validation, members: DataTable) {
+        const array = await arr.value();
         const membersArray = await Promise.all(
-            members.raw().map(memberKey => getValue(memberKey.pop() as string))
+            members.raw().map(memberKey => this.getValue(memberKey.pop()))
         );
         validation(array, membersArray);
     }
@@ -136,12 +129,11 @@ function validateAnyOf(AR: any, ERs: any[], validation: (AR: any, ER: any) => vo
  * When I expect '$text' to equal at least one of '$js(["free", "11.99"])'
  */
 Then(
-    'I expect {string} {memoryValidation} at least one of {string}',
-    async function (actual: string, validationType: string, expected: string) {
-        const actualValue = await getValue(actual);
-        const expectedValues = await getValue(expected);
-        if (!(expectedValues instanceof Array)) throw new Error(`'${expected}' parameter is not an array`);
-        const validation = getValidation(validationType);
+    'I expect {value} {validation} at least one of {value}',
+    async function (actual: MemoryValue, validation: Validation, expected: MemoryValue) {
+        const actualValue = await actual.value();
+        const expectedValues = await expected.value();
+        if (!(expectedValues instanceof Array)) throw new Error(`'${expected.expression}' parameter is not an array`);
         validateAnyOf(actualValue, expectedValues, validation);
     }
 );
@@ -157,11 +149,10 @@ Then(
  *     | 11.99 |
  */
 Then(
-    'I expect {string} {memoryValidation} at least one of:',
-    async function (actual: string, validationType: string, expected: DataTable) {
-        const actualValue = await getValue(actual);
-        const expectedValues = await dataTable2Array(expected);
-        const validation = getValidation(validationType);
+    'I expect {value} {validation} at least one of:',
+    async function (actual: MemoryValue, validation: Validation, expected: DataTable) {
+        const actualValue = await actual.value();
+        const expectedValues = await dataTable2Array(this, expected);
         validateAnyOf(actualValue, expectedValues, validation);
     }
 );
@@ -189,12 +180,11 @@ function validateAllOf(AR: any, ERs: any[], validation: (AR: any, ER: any) => vo
  * When I expect '$text' not to equal all of '$js(["free", "10.00"])'
  */
 Then(
-    'I expect {string} {memoryValidation} all of {string}',
-    async function (actual: string, validationType: string, expected: string) {
-        const actualValue = await getValue(actual);
-        const expectedValues = await getValue(expected);
-        if (!(expectedValues instanceof Array)) throw new Error(`'${expected}' parameter is not an array`);
-        const validation = getValidation(validationType);
+    'I expect {value} {validation} all of {value}',
+    async function (actual: MemoryValue, validation: Validation, expected: MemoryValue) {
+        const actualValue = await actual.value();
+        const expectedValues = await expected.value();
+        if (!(expectedValues instanceof Array)) throw new Error(`'${expected.expression}' parameter is not an array`);
         validateAllOf(actualValue, expectedValues, validation);
     }
 );
@@ -210,11 +200,10 @@ Then(
  *    | 10.00 |
  */
 Then(
-    'I expect {string} {memoryValidation} all of:',
-    async function (actual: string, validationType: string, expected: DataTable) {
-        const actualValue = await getValue(actual);
-        const expectedValues = await dataTable2Array(expected);
-        const validation = getValidation(validationType);
+    'I expect {value} {validation} all of:',
+    async function (actual: MemoryValue, validation: Validation, expected: DataTable) {
+        const actualValue = await actual.value();
+        const expectedValues = await dataTable2Array(this, expected);
         validateAllOf(actualValue, expectedValues, validation);
     }
 );
