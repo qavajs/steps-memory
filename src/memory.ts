@@ -1,7 +1,6 @@
 import { DataTable, When } from '@cucumber/cucumber';
-import memory from '@qavajs/memory';
-import { getValue } from './transformers';
 import { dataTable2Object } from './utils';
+import { MemoryValue } from '@qavajs/core';
 
 /**
  * Save result of math expression and save result to memory
@@ -11,11 +10,10 @@ import { dataTable2Object } from './utils';
  * @example When I save result of math expression '{$random()} * 100' as 'result'
  */
 When(
-    'I save result of math expression {string} as {string}',
-    async function (expression: string, key: string) {
-        const resolvedExpression: string = await getValue(expression);
-        const exprFn = new Function('return ' + resolvedExpression);
-        memory.setValue(key, exprFn());
+    'I save result of math expression {value} as {value}',
+    async function (expression: MemoryValue, key: MemoryValue) {
+        const exprFn = new Function('return ' + await expression.value());
+        key.set(exprFn());
     }
 );
 
@@ -27,18 +25,17 @@ When(
  * @example I save '$getRandomUser()' to memory as 'user'
  */
 When(
-   'I save {string} to memory as {string}',
-    async function (alias: string, key: string) {
-      const value: string = await memory.getValue(alias);
-      memory.setValue(key, value);
+   'I save {value} to memory as {value}',
+    async function (value: MemoryValue, key: MemoryValue) {
+      key.set(await value.value());
     }
 );
 
 When(
-    'I save multiline string to memory as {string}:',
-    async function (key: string, multilineString: string) {
-        const value: string = await memory.getValue(multilineString);
-        memory.setValue(key, value);
+    'I save multiline string to memory as {value}:',
+    async function (key: MemoryValue, multilineString: string) {
+        const value: string = await this.getValue(multilineString);
+        key.set(value);
     }
 );
 
@@ -49,10 +46,9 @@ When(
  * @example I set 'key' = 'value'
  */
 When(
-    'I set {string} = {string}',
-    async function (key: string, value: string) {
-        const resolvedValue: string = await memory.getValue(value);
-        memory.setValue(key, resolvedValue);
+    'I set {value} = {value}',
+    async function (key: MemoryValue, value: MemoryValue) {
+        key.set(await value.value());
     }
 );
 
@@ -68,10 +64,10 @@ When(
  * """
  */
 When(
-    'I save json to memory as {string}:',
-    async function (key: string, json: string) {
-        const value: string = await memory.getValue(json);
-        memory.setValue(key, JSON.parse(value));
+    'I save json to memory as {value}:',
+    async function (key: MemoryValue, json: string) {
+        const value: string = await this.getValue(json);
+        key.set(JSON.parse(value));
     }
 );
 
@@ -84,9 +80,9 @@ When(
  * | someOtherKey | $valueFromMemory |
  */
 When(
-    'I save key-value pairs to memory as {string}:',
-    async function (key: string, kv: DataTable) {
-        const value = await dataTable2Object(kv);
-        memory.setValue(key, value);
+    'I save key-value pairs to memory as {value}:',
+    async function (key: MemoryValue, kv: DataTable) {
+        const value = await dataTable2Object(this, kv);
+        key.set(value);
     }
 );
