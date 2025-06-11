@@ -4,6 +4,26 @@ All notable changes to the "@qavajs/steps-memory" will be documented in this fil
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+:rocket: - new feature
+
+:beetle: - bugfix
+
+:x: - deprecation/removal
+
+:pencil: - chore
+
+:microscope: - experimental
+
+## [3.0.0]
+[Breaking Changes]
+- :rocket: moved steps exports to `steps.js`
+```typescript
+export default {
+    require: [
+        'node_modules/@qavajs/steps-memory/steps.js'
+    ]
+}
+
 ## [2.0.0]
 - updated validation dependency
 
