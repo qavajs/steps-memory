@@ -1,6 +1,6 @@
 {
   "name": "@qavajs/steps-memory",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "steps to perform memory validation",
   "main": "index.js",
   "scripts": {
@@ -22,11 +22,36 @@
   },
   "homepage": "https://github.com/qavajs/steps-memory#readme",
   "devDependencies": {
-    "@cucumber/cucumber": "^11.0.1",
-    "@qavajs/core": "^2.0.2",
-    "@qavajs/console-formatter": "^0.8.0",
+    "@cucumber/cucumber": "^12.2.0",
+    "@qavajs/core": "^2.6.0",
+    "@qavajs/console-formatter": "^1.0.0",
     "@types/chai": "^4.3.20",
     "ts-node": "^10.9.2",
-    "typescript": "^5.6.3"
-  }
+    "typescript": "^5.9.2"
+  },
+  "keywords": [
+    "test",
+    "automation",
+    "testing",
+    "qa",
+    "quality-assurance",
+    "test-framework",
+    "test-runner",
+    "test-automation",
+    "e2e",
+    "end-to-end",
+    "ui-testing",
+    "integration-testing",
+    "acceptance-testing",
+    "functional-testing",
+    "browser-testing",
+    "mobile-testing",
+    "cross-browser",
+    "bdd",
+    "gherkin",
+    "assertions",
+    "continuous-delivery",
+    "automation-framework",
+    "qavajs"
+  ]
 }

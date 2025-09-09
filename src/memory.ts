@@ -1,6 +1,5 @@
-import { DataTable, When } from '@cucumber/cucumber';
 import { dataTable2Object } from './utils';
-import { MemoryValue } from '@qavajs/core';
+import { type MemoryValue, DataTable, When } from '@qavajs/core';
 
 /**
  * Save result of math expression and save result to memory

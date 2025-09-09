@@ -1,6 +1,5 @@
-import { DataTable, Then } from '@cucumber/cucumber';
 import { dataTable2Array } from './utils';
-import { MemoryValue, Validation } from '@qavajs/core';
+import { type MemoryValue, type Validation, DataTable, Then } from '@qavajs/core';
 
 /**
  * Verify that value from memory satisfies validation against other value
@@ -29,17 +28,19 @@ Then(
     async function (expectedNumber: number, arr: MemoryValue, validation: Validation, expectedValue: MemoryValue) {
         const array: Array<any> = await arr.value();
         const val: any = await expectedValue.value();
-        const failCounter = { fail: 0, pass: 0 };
+        let passed = 0;
+        const errorCollector: Error[] = [];
         for (const value of array) {
             try {
                 validation(await value, val);
-                failCounter.pass++;
+                passed++;
             } catch (err) {
-                failCounter.fail++;
+                errorCollector.push(err as Error);
             }
         }
-        if (failCounter.pass < expectedNumber) {
-            throw new Error(`Less than ${expectedNumber} pass validation`);
+        if (passed < expectedNumber) {
+            const errorMessages = errorCollector.map(err => err.message).join('\n')
+            throw new Error(`Less than ${expectedNumber} pass validation\n${errorMessages}`);
         }
     }
 );

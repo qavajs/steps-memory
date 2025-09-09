@@ -4,6 +4,10 @@ All notable changes to the "@qavajs/steps-memory" will be documented in this fil
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [2.0.1]
+- updated imports
+- improved `at least` step to show collected errors
+
 ## [2.0.0]
 - updated validation dependency
 
