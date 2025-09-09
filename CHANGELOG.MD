@@ -6,6 +6,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [2.0.1]
 - updated imports
+- improved `at least` step to show collected errors
 
 ## [2.0.0]
 - updated validation dependency
