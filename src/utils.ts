@@ -1,4 +1,4 @@
-import { DataTable } from '@cucumber/cucumber';
+import { DataTable } from '@qavajs/core';
 
 /**
  * Transform key-value data table to JS object

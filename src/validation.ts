@@ -1,6 +1,5 @@
-import { DataTable, Then } from '@cucumber/cucumber';
 import { dataTable2Array } from './utils';
-import { MemoryValue, Validation } from '@qavajs/core';
+import { type MemoryValue, type Validation, DataTable, Then } from '@qavajs/core';
 
 /**
  * Verify that value from memory satisfies validation against other value
