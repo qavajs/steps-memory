@@ -1,13 +1,15 @@
 # @qavajs/steps-memory
-Step library to work with memory module
+Step library to work with the memory module
 
 ## Installation
 
-`npm install @qavajs/steps-memory`
+```
+npm install @qavajs/steps-memory
+```
 
 ## Configuration
 
-```javascript
+```typescript
 export default {
     require: ['@qavajs/steps-memory/index.js']
 }
