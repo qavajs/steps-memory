@@ -2,9 +2,9 @@
   "name": "@qavajs/steps-memory",
   "version": "2.1.0",
   "description": "steps to perform memory validation",
-  "main": "./index.js",
+  "main": "./lib/index.js",
   "exports": {
-    ".": "./index.js"
+    ".": "./lib/index.js"
   },
   "scripts": {
     "build": "tsc",
