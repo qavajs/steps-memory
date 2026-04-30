@@ -1,4 +1,4 @@
-import { DataTable } from '@qavajs/core';
+import { DataTable, type IQavajsWorld } from '@qavajs/core';
 
 /**
  * Transform key-value data table to JS object
@@ -6,7 +6,7 @@ import { DataTable } from '@qavajs/core';
  * @param dataTable
  * @return {Object}
  */
-export async function dataTable2Object(context: any, dataTable: DataTable): Promise<{ [key: string]: string }> {
+export async function dataTable2Object(context: IQavajsWorld, dataTable: DataTable): Promise<{ [key: string]: string }> {
     const obj: { [key: string]: string } = {};
     for (const [key, value] of dataTable.raw()) {
         obj[key] = await context.getValue(value);
@@ -20,6 +20,6 @@ export async function dataTable2Object(context: any, dataTable: DataTable): Prom
  * @param dataTable
  * @return {any[]}
  */
-export function dataTable2Array(context: any, dataTable: DataTable): Promise<any[]> {
+export function dataTable2Array(context: IQavajsWorld, dataTable: DataTable): Promise<any[]> {
     return Promise.all(dataTable.raw().map(([value]) => context.getValue(value)));
 }

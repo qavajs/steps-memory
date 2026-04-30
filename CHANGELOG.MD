@@ -4,6 +4,11 @@ All notable changes to the "@qavajs/steps-memory" will be documented in this fil
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [2.1.0]
+- added `exports` and `engines` fields to package.json
+- typed world context with `IQavajsWorld` in step definitions and utils
+- expanded README with full step definitions reference
+
 ## [2.0.1]
 - updated imports
 - improved `at least` step to show collected errors

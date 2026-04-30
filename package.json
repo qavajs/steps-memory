@@ -1,8 +1,11 @@
 {
   "name": "@qavajs/steps-memory",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "steps to perform memory validation",
-  "main": "index.js",
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js"
+  },
   "scripts": {
     "build": "tsc",
     "test:e2e": "qavajs run --config test-e2e/memory.ts",
@@ -22,12 +25,11 @@
   },
   "homepage": "https://github.com/qavajs/steps-memory#readme",
   "devDependencies": {
-    "@cucumber/cucumber": "^12.2.0",
-    "@qavajs/core": "^2.6.0",
-    "@qavajs/console-formatter": "^1.0.0",
-    "@types/chai": "^4.3.20",
+    "@cucumber/cucumber": "^12.8.2",
+    "@qavajs/core": "^2.15.1",
+    "@qavajs/console-formatter": "^1.2.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.2"
+    "typescript": "^6.0.3"
   },
   "keywords": [
     "test",

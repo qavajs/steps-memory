@@ -1,5 +1,5 @@
 import { dataTable2Array } from './utils';
-import { type MemoryValue, type Validation, DataTable, Then } from '@qavajs/core';
+import { type MemoryValue, type Validation, type IQavajsWorld, DataTable, Then } from '@qavajs/core';
 
 /**
  * Verify that value from memory satisfies validation against other value
@@ -74,7 +74,7 @@ Then(
  */
 Then(
     'I expect {value} array to be sorted by {value}',
-    async function (arr: MemoryValue, comparator: MemoryValue) {
+    async function (this: IQavajsWorld, arr: MemoryValue, comparator: MemoryValue) {
         const array: Array<any> = await arr.value();
         if (!Array.isArray(array)) throw new Error(`'${arr}' is not an array`);
         const comparatorFn: (a: any, b: any) => number = await comparator.value();
@@ -99,7 +99,7 @@ Then(
  */
 Then(
     'I expect {value} array {validation}:',
-    async function (arr: MemoryValue, validation: Validation, members: DataTable) {
+    async function (this: IQavajsWorld, arr: MemoryValue, validation: Validation, members: DataTable) {
         const array = await arr.value();
         const membersArray = await Promise.all(
             members.raw().map(memberKey => this.getValue(memberKey.pop()))
@@ -151,7 +151,7 @@ Then(
  */
 Then(
     'I expect {value} {validation} at least one of:',
-    async function (actual: MemoryValue, validation: Validation, expected: DataTable) {
+    async function (this: IQavajsWorld, actual: MemoryValue, validation: Validation, expected: DataTable) {
         const actualValue = await actual.value();
         const expectedValues = await dataTable2Array(this, expected);
         validateAnyOf(actualValue, expectedValues, validation);
@@ -202,7 +202,7 @@ Then(
  */
 Then(
     'I expect {value} {validation} all of:',
-    async function (actual: MemoryValue, validation: Validation, expected: DataTable) {
+    async function (this: IQavajsWorld, actual: MemoryValue, validation: Validation, expected: DataTable) {
         const actualValue = await actual.value();
         const expectedValues = await dataTable2Array(this, expected);
         validateAllOf(actualValue, expectedValues, validation);

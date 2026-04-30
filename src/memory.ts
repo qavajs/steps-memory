@@ -1,5 +1,5 @@
 import { dataTable2Object } from './utils';
-import { type MemoryValue, DataTable, When } from '@qavajs/core';
+import { type MemoryValue, type IQavajsWorld, DataTable, When } from '@qavajs/core';
 
 /**
  * Save result of math expression and save result to memory
@@ -32,7 +32,7 @@ When(
 
 When(
     'I save multiline string to memory as {value}:',
-    async function (key: MemoryValue, multilineString: string) {
+    async function (this: IQavajsWorld, key: MemoryValue, multilineString: string) {
         const value: string = await this.getValue(multilineString);
         key.set(value);
     }
@@ -64,7 +64,7 @@ When(
  */
 When(
     'I save json to memory as {value}:',
-    async function (key: MemoryValue, json: string) {
+    async function (this: IQavajsWorld, key: MemoryValue, json: string) {
         const value: string = await this.getValue(json);
         key.set(JSON.parse(value));
     }
@@ -80,7 +80,7 @@ When(
  */
 When(
     'I save key-value pairs to memory as {value}:',
-    async function (key: MemoryValue, kv: DataTable) {
+    async function (this: IQavajsWorld, key: MemoryValue, kv: DataTable) {
         const value = await dataTable2Object(this, kv);
         key.set(value);
     }
