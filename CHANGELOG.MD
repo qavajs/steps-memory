@@ -4,6 +4,9 @@ All notable changes to the "@qavajs/steps-memory" will be documented in this fil
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [2.1.1]
+- refactored project structure: updated main entry point, migrated index.js imports to src/index.ts, adjusted tsconfig.json settings
+
 ## [2.1.0]
 - added `exports` and `engines` fields to package.json
 - typed world context with `IQavajsWorld` in step definitions and utils
